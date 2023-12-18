@@ -5,7 +5,6 @@ import plotly.express as px
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-
 # Configure the page
 st.set_page_config(
     page_title="Sociolla Products Catalog",
@@ -51,8 +50,7 @@ st.header("Additional Visualizations")
 # Select box for the type of graph
 selected_graph = st.selectbox("Select the type of graph", ['Bar', 'Pie', 'Histogram', 'Box', 'Violin',
                                                         'Scatter', 'Area', 'Pair', 'Bubble',
-                                                        'Heatmap', 'Funnel', 'Treemap',
-                                                        '3D Scatter Plot', '3D Line Plot', '3D Surface Plot'])
+                                                        'Heatmap', 'Funnel', 'Treemap'])
 
 # Dynamically generate select box for column based on the selected graph type
 selected_column = None
@@ -90,6 +88,7 @@ elif selected_graph == 'Treemap':
     treemap_fig = px.treemap(df, path=selected_columns_treemap, title="Treemap")
     st.plotly_chart(treemap_fig, use_container_width=True)
 
+
 # 3D Plots
 st.header("3D Visualizations")
 selected_3d_graph = st.selectbox("Select the type of 3D graph", ['3D Scatter Plot', '3D Line Plot', '3D Surface Plot'])
@@ -115,7 +114,9 @@ elif selected_3d_graph == '3D Surface Plot':
     fig_3d_surface = px.surface(df, x=col1, y=col2, z=col3, title=f'3D Surface Plot - {col1} vs {col2} vs {col3}')
     st.plotly_chart(fig_3d_surface, use_container_width=True)
 
-# About section
+
+
+# About Section
 st.header("About")
 st.markdown(
     """
@@ -130,11 +131,6 @@ st.markdown(
     *Created By: Yusuf Tajwar*
     """
 )
-
-
-
-
-
 
 
 # how to run the app 
