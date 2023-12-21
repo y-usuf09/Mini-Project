@@ -85,35 +85,110 @@ elif selected_graph == 'Histogram':
     st.plotly_chart(hist_fig, use_container_width=True)
 
 elif selected_graph == 'Treemap':
-    treemap_fig = px.treemap(df, path=selected_columns_treemap, title="Treemap")
-    st.plotly_chart(treemap_fig, use_container_width=True)
+    if 'selected_columns_treemap' in locals():  
+        treemap_fig = px.treemap(df, path=selected_columns_treemap, title="Treemap")
+        st.plotly_chart(treemap_fig, use_container_width=True)
+
+elif selected_graph == 'Box':
+    box_fig = px.box(df, x=selected_column, title=f'Box Plot - {selected_column}')
+    st.plotly_chart(box_fig, use_container_width=True)
+
+elif selected_graph == 'Violin':
+    violin_fig = px.violin(df, y=selected_column, title=f'Violin Plot - {selected_column}')
+    st.plotly_chart(violin_fig, use_container_width=True)
+
+elif selected_graph == 'Scatter':
+    selected_column_y = st.selectbox("Select the column for Scatter plot (y-axis)", df.columns)
+    scatter_fig = px.scatter(df, x=selected_column, y=selected_column_y, title=f'Scatter Plot - {selected_column} vs {selected_column_y}')
+    st.plotly_chart(scatter_fig, use_container_width=True)
+
+elif selected_graph == 'Area':
+    area_fig = px.area(df, x=selected_column, title=f'Area Plot - {selected_column}')
+    st.plotly_chart(area_fig, use_container_width=True)
+
+elif selected_graph == 'Pair':
+    pair_fig = px.scatter_matrix(df, dimensions=[selected_column, selected_column_size], title=f'Pair Plot - {selected_column} vs {selected_column_size}')
+    st.plotly_chart(pair_fig, use_container_width=True)
+
+elif selected_graph == 'Bubble':
+    bubble_fig = px.scatter(df, x=selected_column, y=selected_column_size, size=selected_column_size, title=f'Bubble Plot - {selected_column} vs {selected_column_size}')
+    st.plotly_chart(bubble_fig, use_container_width=True)
+
+elif selected_graph == 'Heatmap':
+    heatmap_fig = px.imshow(df[selected_columns_heatmap].corr(), title='Heatmap - Correlation Matrix')
+    st.plotly_chart(heatmap_fig, use_container_width=True)
+
+elif selected_graph == 'Funnel':
+    funnel_fig = px.funnel(df, x=selected_column, title=f'Funnel Plot - {selected_column}')
+    st.plotly_chart(funnel_fig, use_container_width=True)
 
 
-# 3D Plots
+# 3D Visualizations
 st.header("3D Visualizations")
-selected_3d_graph = st.selectbox("Select the type of 3D graph", ['3D Scatter Plot', '3D Line Plot', '3D Surface Plot'])
+selected_3d_graph = st.selectbox("Select the type of 3D graph", ['3D Scatter Plot', '3D Line Plot', '3D Surface Plot',
+                                                                '3D Bar Plot', '3D Scatter Matrix', '3D Bubble Plot',
+                                                                '3D Cone Plot', '3D Mesh Plot', '3D Scatter Polar Plot'])
 
 if selected_3d_graph == '3D Scatter Plot':
-    col1 = st.selectbox("Select the column for X-axis", df.columns)
-    col2 = st.selectbox("Select the column for Y-axis", df.columns)
-    col3 = st.selectbox("Select the column for Z-axis", df.columns)
+    col1 = st.selectbox("Select the column for X-axis", [None] + df.columns.tolist())
+    col2 = st.selectbox("Select the column for Y-axis", [None] + df.columns.tolist())
+    col3 = st.selectbox("Select the column for Z-axis", [None] + df.columns.tolist())
     fig_3d_scatter = px.scatter_3d(df, x=col1, y=col2, z=col3, title=f'3D Scatter Plot - {col1} vs {col2} vs {col3}')
     st.plotly_chart(fig_3d_scatter, use_container_width=True)
 
 elif selected_3d_graph == '3D Line Plot':
-    col1 = st.selectbox("Select the column for X-axis", df.columns)
-    col2 = st.selectbox("Select the column for Y-axis", df.columns)
-    col3 = st.selectbox("Select the column for Z-axis", df.columns)
+    col1 = st.selectbox("Select the column for X-axis", [None] + df.columns.tolist())
+    col2 = st.selectbox("Select the column for Y-axis", [None] + df.columns.tolist())
+    col3 = st.selectbox("Select the column for Z-axis", [None] + df.columns.tolist())
     fig_3d_line = px.line_3d(df, x=col1, y=col2, z=col3, title=f'3D Line Plot - {col1} vs {col2} vs {col3}')
     st.plotly_chart(fig_3d_line, use_container_width=True)
 
 elif selected_3d_graph == '3D Surface Plot':
-    col1 = st.selectbox("Select the column for X-axis", df.columns)
-    col2 = st.selectbox("Select the column for Y-axis", df.columns)
-    col3 = st.selectbox("Select the column for Z-axis", df.columns)
-    fig_3d_surface = px.surface(df, x=col1, y=col2, z=col3, title=f'3D Surface Plot - {col1} vs {col2} vs {col3}')
+    col1 = st.selectbox("Select the column for X-axis", [None] + df.columns.tolist())
+    col2 = st.selectbox("Select the column for Y-axis", [None] + df.columns.tolist())
+    col3 = st.selectbox("Select the column for Z-axis", [None] + df.columns.tolist())
+    fig_3d_surface = px.surface_3d(df, x=col1, y=col2, z=col3, title=f'3D Surface Plot - {col1} vs {col2} vs {col3}')
     st.plotly_chart(fig_3d_surface, use_container_width=True)
 
+elif selected_3d_graph == '3D Bar Plot':
+    col1 = st.selectbox("Select the column for X-axis", [None] + df.columns.tolist())
+    col2 = st.selectbox("Select the column for Y-axis", [None] + df.columns.tolist())
+    col3 = st.selectbox("Select the column for Z-axis", [None] + df.columns.tolist())
+    fig_3d_bar = px.bar_3d(df, x=col1, y=col2, z=col3, title=f'3D Bar Plot - {col1} vs {col2} vs {col3}')
+    st.plotly_chart(fig_3d_bar, use_container_width=True)
+
+elif selected_3d_graph == '3D Scatter Matrix':
+    dimensions = st.multiselect("Select the columns for Scatter Matrix", df.columns.tolist())
+    fig_3d_scatter_matrix = px.scatter_matrix(df, dimensions=dimensions, title='3D Scatter Matrix')
+    st.plotly_chart(fig_3d_scatter_matrix, use_container_width=True)
+
+elif selected_3d_graph == '3D Bubble Plot':
+    col1 = st.selectbox("Select the column for X-axis", [None] + df.columns.tolist())
+    col2 = st.selectbox("Select the column for Y-axis", [None] + df.columns.tolist())
+    col3 = st.selectbox("Select the column for Z-axis", [None] + df.columns.tolist())
+    fig_3d_bubble = px.scatter_3d(df, x=col1, y=col2, z=col3, title=f'3D Bubble Plot - {col1} vs {col2} vs {col3}')
+    st.plotly_chart(fig_3d_bubble, use_container_width=True)
+
+elif selected_3d_graph == '3D Cone Plot':
+    col1 = st.selectbox("Select the column for X-axis", [None] + df.columns.tolist())
+    col2 = st.selectbox("Select the column for Y-axis", [None] + df.columns.tolist())
+    col3 = st.selectbox("Select the column for Z-axis", [None] + df.columns.tolist())
+    fig_3d_cone = px.cone(df, x=col1, y=col2, z=col3, title=f'3D Cone Plot - {col1} vs {col2} vs {col3}')
+    st.plotly_chart(fig_3d_cone, use_container_width=True)
+
+elif selected_3d_graph == '3D Mesh Plot':
+    col1 = st.selectbox("Select the column for X-axis", [None] + df.columns.tolist())
+    col2 = st.selectbox("Select the column for Y-axis", [None] + df.columns.tolist())
+    col3 = st.selectbox("Select the column for Z-axis", [None] + df.columns.tolist())
+    fig_3d_mesh = px.scatter_3d(df, x=col1, y=col2, z=col3, color=col3, title=f'3D Mesh Plot - {col1} vs {col2} vs {col3}')
+    st.plotly_chart(fig_3d_mesh, use_container_width=True)
+
+elif selected_3d_graph == '3D Scatter Polar Plot':
+    col1 = st.selectbox("Select the column for Theta-axis", [None] + df.columns.tolist())
+    col2 = st.selectbox("Select the column for Phi-axis", [None] + df.columns.tolist())
+    col3 = st.selectbox("Select the column for R-axis", [None] + df.columns.tolist())
+    fig_3d_polar = px.scatter_3d_polar(df, theta=col1, phi=col2, r=col3, title=f'3D Scatter Polar Plot - {col1} vs {col2} vs {col3}')
+    st.plotly_chart(fig_3d_polar, use_container_width=True)
 
 
 # About Section
