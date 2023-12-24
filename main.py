@@ -30,7 +30,7 @@ with st.spinner("Loading data..."):
 df.dropna(inplace=True)  # Drop rows with any missing values.
 
 # Remove specific columns
-columns_to_remove = ["index"]
+columns_to_remove = [""]
 
 # Check if the columns exist in the DataFrame before removing
 columns_exist = all(column in df.columns for column in columns_to_remove)
@@ -214,4 +214,4 @@ st.markdown(
 
 # how to run the app 
 # open terminal and run: 
-# streamlit run practice.py 
+# streamlit run main.py  
