@@ -192,7 +192,7 @@ elif selected_3d_graph == '3D Mesh Plot':
 st.header("About")
 st.markdown(
     """
-    *🌟 Video Game Sales and Ratings Explorer 🎮*
+    **🌟 Video Game Sales and Ratings Explorer 🎮**
 
     Welcome to the Video Game Sales and Ratings Explorer, where we unlock the secrets behind gaming triumphs! This app is your passport to a deep dive into the fascinating world of video game sales strategies and ratings success.
 
