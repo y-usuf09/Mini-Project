@@ -204,7 +204,7 @@ st.markdown(
     Ready to level up your understanding of video game dynamics? Dive into the data, explore the plots,
     and unveil the stories behind the success of your favorite games!
 
-    *Built with Streamlit, Pandas, Plotly, Seaborn, and Matplotlib.*
+    *Built with Streamlit, Pandas, Numpy, Plotly, Seaborn, and Matplotlib.*
 
     *Created By: Yusuf Tajwar*
     """
